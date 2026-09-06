@@ -1,0 +1,81 @@
+  :root {
+    --ink: #000;
+    --muted: #6b6b6b;
+    --rule: #d9d9d9;
+    --paper: #fff;
+    --afd: #009ee0;   /* Parteifarbe, nur für die Trendlinie */
+    --poll: #9a9a9a;
+  }
+  html { background: var(--paper); color: var(--ink);
+         font: 18px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  body { margin: 0; }
+  main { max-width: 760px; margin: 0 auto; padding: 8vh 20px 6vh; }
+  h1 { font-size: 1.15rem; font-weight: 400; color: var(--muted); margin: 0 0 .25em; letter-spacing: .01em; }
+  .answer { font-size: clamp(3.2rem, 12vw, 7.5rem); font-weight: 900; line-height: .95;
+            letter-spacing: -.03em; margin: 0 0 .35em; }
+  .day { font-size: 1.15rem; margin: 0 0 3rem; }
+  .day b { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 0 0 2.5rem;
+          border-top: 2px solid var(--ink); padding-top: 14px; }
+  .pair p { margin: 0; }
+  .pair .v { font-size: 2.6rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.1;
+             font-variant-numeric: tabular-nums; }
+  .pair .l { color: var(--muted); font-size: .95rem; }
+  .delta { font-weight: 700; }
+
+  figure { margin: 0 0 1.5rem; }
+  figure svg { width: 100%; height: auto; display: block; }
+  figcaption { color: var(--muted); font-size: .9rem; margin-top: .5rem; max-width: 60ch; }
+  .grid { stroke: var(--rule); stroke-width: 1; }
+  .tick { fill: var(--muted); font-size: 12px; font-family: inherit; }
+  .baseline { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 4 4; }
+  .poll { fill: var(--poll); opacity: .6; }
+  .trend { fill: none; stroke: var(--afd); stroke-width: 2.5; stroke-linejoin: round; }
+  .fit { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+  .fit-ext { fill: none; stroke: var(--afd); stroke-width: 2.5; stroke-dasharray: 6 5; }
+  .band { fill: var(--afd); opacity: .10; }
+  .marker { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 2 3; }
+
+  summary { cursor: pointer; color: var(--muted); font-size: .95rem; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "\25B8\00A0"; }
+  details[open] > summary::before { content: "\25BE\00A0"; }
+  details[open] > summary { margin-bottom: .9rem; }
+  summary:hover { color: var(--ink); }
+  details.prose { border-top: 1px solid var(--rule); padding-top: 14px; margin-bottom: 1.5rem; }
+
+  .method { border-top: 1px solid var(--rule); padding-top: 14px; color: var(--muted);
+            font-size: .9rem; max-width: 64ch; }
+  .method p { margin: 0 0 .7em; }
+  a { color: inherit; }
+
+  /* Textseiten (Impressum, AGB, Prognose) */
+  .page-title { font-size: clamp(2rem, 7vw, 3.2rem); font-weight: 900; letter-spacing: -.03em;
+                line-height: 1; margin: 0 0 1.5rem; color: var(--ink); }
+  .lede { font-size: 1.15rem; margin: 0 0 2.5rem; max-width: 64ch; }
+  .prose { max-width: 64ch; }
+  .prose h2 { font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; text-transform: uppercase;
+              margin: 2.2rem 0 .6rem; border-top: 1px solid var(--rule); padding-top: 1.1rem; }
+  .prose h3 { font-size: 1rem; font-weight: 700; margin: 1.4rem 0 .3rem; }
+  .prose p, .prose li { font-size: 1rem; }
+  .prose p { margin: 0 0 .8em; }
+  .prose ul, .prose ol { margin: 0 0 .8em; padding-left: 1.3em; }
+  .prose li { margin: 0 0 .3em; }
+  .prose address { font-style: normal; margin: 0 0 .8em; }
+  .prose .small { color: var(--muted); font-size: .9rem; }
+
+  .projection { border-top: 2px solid var(--ink); margin-top: 3.5rem; padding-top: 1.4rem; }
+  .section-head { font-size: clamp(1.6rem, 5vw, 2.4rem); font-weight: 900; letter-spacing: -.02em;
+                  line-height: 1.05; margin: 0 0 .6rem; }
+  .projection .lede { margin-bottom: 1.2rem; }
+  .answer.proj { font-size: clamp(2.8rem, 10vw, 6rem); color: var(--afd); margin-bottom: .2em; }
+  .projection .day { margin-bottom: 2rem; }
+  .projection .method { margin-top: 1.5rem; }
+
+  .backlink { display: inline-block; margin: 0 0 2rem; font-size: .95rem; color: var(--muted); }
+  nav.site { border-top: 1px solid var(--rule); margin-top: 3rem; padding-top: 14px;
+             color: var(--muted); font-size: .9rem; }
+  nav.site a { margin-right: 1.2em; }
+
+  @media (max-width: 480px) { .pair { grid-template-columns: 1fr; gap: 14px; } }

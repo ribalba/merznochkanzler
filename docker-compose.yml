@@ -1,0 +1,25 @@
+services:
+  merznochkanzler:
+    build: .
+    image: merznochkanzler
+    container_name: merznochkanzler
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      TZ: Europe/Berlin
+      REBUILD_AT: "04:15"      # täglicher Build, Ortszeit
+      RETRY_MINUTES: "30"      # erneuter Versuch nach einem Fehlschlag
+    volumes:
+      # Gebaute Seite überlebt Neustarts; nach einem fehlgeschlagenen Build
+      # bleibt die letzte funktionierende Fassung online.
+      - site:/app/site
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/healthz"]
+      interval: 60s
+      timeout: 5s
+      start_period: 300s
+      retries: 3
+
+volumes:
+  site:

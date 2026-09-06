@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ist Merz noch Kanzler?</title>
+<meta name="description" content="Tägliche Antwort auf eine einfache Frage, mit den Umfragewerten der AfD seit Amtsantritt.">
+<style>
+{{STYLE}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Ist Friedrich Merz noch Bundeskanzler?</h1>
+  <p class="answer">{{ANSWER}}</p>
+  <p class="day">Seit dem {{TERM_START_DE}}, also seit <b id="days">{{DAYS_TODAY}}</b> Tagen.</p>
+
+  <div class="pair">
+    <p><span class="v">{{AFD_ELECTION}}&#8239;%</span><br><span class="l">AfD bei der Bundestagswahl 2025</span></p>
+    <p><span class="v">{{AFD_NOW}}&#8239;%</span><br><span class="l">AfD im Umfragetrend, Stand {{LAST_POLL}} <span class="delta">({{AFD_DELTA}})</span></span></p>
+  </div>
+
+  <figure>
+    {{CHART}}
+    <figcaption>Graue Punkte: einzelne Bundestagsumfragen ({{N_POLLS}} seit Amtsantritt). Blaue Gerade: lineare Regression über diese Punkte, {{PER_100}} Punkte je 100 Tage. Waagerecht gestrichelt: amtliches Ergebnis der Bundestagswahl.</figcaption>
+  </figure>
+
+  <details class="method">
+    <summary>Details</summary>
+    <p>Der Trendwert oben ist der Mittelwert der jeweils neuesten Umfrage jedes Instituts, höchstens {{WINDOW}} Tage alt; das gleicht Institutseffekte aus. Über alle Umfragen seit Amtsantritt: Pearson-Korrelation zwischen Tagen im Amt und AfD-Wert r&nbsp;=&nbsp;{{R}}, lineare Steigung {{PER_100}} Punkte je 100 Tage. Das ist eine Korrelation mit der Zeit, keine Ursachenanalyse; die Überschrift dieser Seite behauptet mehr, als die Daten zeigen können.</p>
+    <p>Daten: <a href="https://dawum.de/">dawum.de</a>, Lizenz ODC-ODbL, Datenbankstand {{DB_UPDATE}}. Seite gebaut am {{BUILD_DATE}}. Die Umfragewerte sind Projektionen der Institute, keine Prognosen.</p>
+  </details>
+
+  <section class="projection" id="prognose">
+    <h2 class="section-head">Und wenn er bleibt?</h2>
+    <p class="lede">Bleibt Friedrich Merz bis zum spätesten regulären Wahltermin am
+      {{NEXT_ELECTION_DE}} im Amt und setzt sich der bisherige Trend geradlinig fort, dann
+      steht die AfD an diesem Tag hier:</p>
+
+    <p class="answer proj">{{PROJ}}&#8239;%</p>
+    <p class="day">Das ist in <b>{{DAYS_TO_ELECTION}}</b> Tagen, nach {{DAYS_IN_OFFICE_THEN}}
+      Tagen Amtszeit. Heute sind es {{AFD_NOW}}&#8239;% ({{PROJ_DELTA}} Punkte).</p>
+
+    <figure>
+      {{PROJ_CHART}}
+      <figcaption>Graue Punkte: einzelne Bundestagsumfragen seit Amtsantritt ({{N_POLLS}} Stück).
+        Schwarze Linie: Regressionsgerade über diese Punkte. Blau gestrichelt: dieselbe Gerade,
+        verlängert bis zum {{NEXT_ELECTION_DE}}. Blaue Fläche: 95-%-Prognoseband. Waagerecht
+        gestrichelt: das Ergebnis der Bundestagswahl 2025.</figcaption>
+    </figure>
+
+    <details class="prose">
+      <summary>Details</summary>
+      <h3>Die Rechnung</h3>
+      <p>Über alle {{N_POLLS}} Bundestagsumfragen seit Amtsantritt steigt der AfD-Wert um
+        {{PER_100}} Punkte je 100 Tage (r&nbsp;=&nbsp;{{R}}). Verlängert bis zum Wahltag landet
+        diese Gerade bei <strong>{{PROJ}}&#8239;%</strong>; das 95-%-Prognoseband für eine
+        einzelne Umfrage an diesem Tag reicht von {{PROJ_LO}}&#8239;% bis {{PROJ_HI}}&#8239;%.
+        Bei der Bundestagswahl 2025 waren es {{AFD_ELECTION}}&#8239;%.</p>
+      <p>Nimmt man nur die {{N_RECENT}} Umfragen der letzten {{RECENT_WINDOW}} Tage, ergibt
+        dieselbe Rechnung {{PROJ_RECENT}}&#8239;%. Der Abstand zwischen beiden Zahlen zeigt,
+        wie stark das Ergebnis davon abhängt, welchen Ausschnitt man betrachtet.
+        {{CROSS_30}}</p>
+
+      <h3>Warum das keine Prognose ist</h3>
+      <p>Dieser Abschnitt rechnet eine Gerade weiter, mehr nicht. Als Wahlprognose taugt das
+        nicht. Dagegen spricht mindestens:</p>
+      <ul>
+        <li><strong>Kein Sättigungspunkt.</strong> Eine Gerade wächst unbegrenzt.
+          Parteianteile tun das nicht; sie stoßen an Obergrenzen, lange bevor die Arithmetik
+          das täte.</li>
+        <li><strong>Zeit ist keine Ursache.</strong> Die Korrelation besteht mit dem Kalender,
+          nicht mit einer Politik. Was den Wert tatsächlich treibt, steht in diesen Daten
+          nicht.</li>
+        <li><strong>Zweieinhalb Jahre sind lang.</strong> Koalitionen, Kandidaturen,
+          Wirtschaftslagen, Verfahren, ein Amtsende – jedes davon bricht die Gerade.</li>
+        <li><strong>Umfragen sind keine Wahlergebnisse.</strong> Die Institute veröffentlichen
+          Projektionen des heutigen Stimmungsbilds, keine Vorhersagen für einen künftigen
+          Termin. Die Unterschiede zwischen den Instituten sind systematisch, nicht zufällig.</li>
+        <li><strong>Der Termin steht nicht fest.</strong> Der {{NEXT_ELECTION_DE}} ist der
+          späteste reguläre Wahltag. Eine vorgezogene Wahl verkürzt die Strecke und senkt
+          damit auch die fortgeschriebene Zahl.</li>
+      </ul>
+      <p>Belastbar ist an dieser Rechnung deshalb nicht die große Zahl, sondern die Richtung:
+        Der Wert steigt bisher, über {{DAYS_TODAY}} Tage hinweg, ziemlich stetig. Ob er das
+        weiter tut, entscheidet keine Regressionsgerade.</p>
+    </details>
+  </section>
+
+  <nav class="site">
+    <a href="impressum.html">Impressum &amp; AGB</a>
+  </nav>
+</main>
+<script>
+  // Tageszähler läuft clientseitig weiter, falls der Build einen Tag hängt.
+  (function () {
+    var start = new Date("{{TERM_START_ISO}}T00:00:00");
+    var days = Math.floor((Date.now() - start) / 864e5);
+    if (days > 0) document.getElementById("days").textContent = days;
+  })();
+</script>
+</body>
+</html>
