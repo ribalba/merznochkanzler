@@ -13,16 +13,35 @@
   h1 { font-size: 1.15rem; font-weight: 400; color: var(--muted); margin: 0 0 .25em; letter-spacing: .01em; }
   .answer { font-size: clamp(3.2rem, 12vw, 7.5rem); font-weight: 900; line-height: .95;
             letter-spacing: -.03em; margin: 0 0 .35em; }
-  .day { font-size: 1.15rem; margin: 0 0 3rem; }
+  .day { font-size: 1.15rem; margin: 0 0 2rem; }
   .day b { font-weight: 700; font-variant-numeric: tabular-nums; }
 
-  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 0 0 2.5rem;
-          border-top: 2px solid var(--ink); padding-top: 14px; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 0 0 2.5rem; }
   .pair p { margin: 0; }
   .pair .v { font-size: 2.6rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.1;
              font-variant-numeric: tabular-nums; }
   .pair .l { color: var(--muted); font-size: .95rem; }
   .delta { font-weight: 700; }
+
+  /* Zeitleiste: Amtsantritt – heute – nächste Wahl */
+  .timeline { margin: 0 0 3rem; }
+  .tl-ends { display: flex; justify-content: space-between; gap: 16px;
+             font-size: .9rem; color: var(--muted); line-height: 1.3; }
+  .tl-ends b { display: block; color: var(--ink); font-weight: 700; }
+  .tl-ends .r { text-align: right; }
+  .tl-track { position: relative; height: 3px; background: var(--rule); margin-top: 2.6rem; }
+  .tl-done { position: absolute; top: 0; bottom: 0; left: 0; background: var(--ink); }
+  .tl-cap { position: absolute; top: -4px; height: 11px; width: 1px; background: var(--ink); }
+  .tl-year { position: absolute; top: 3px; height: 6px; width: 1px; background: var(--rule); }
+  .tl-year > span { position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+                    font-size: .8rem; color: var(--muted); }
+  .tl-now { position: absolute; top: 50%; width: 13px; height: 13px; border-radius: 50%;
+            background: var(--ink); transform: translate(-50%, -50%);
+            box-shadow: 0 0 0 4px var(--paper); }
+  .tl-flag { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+             font-size: 1rem; font-weight: 700; white-space: nowrap; }
+  .tl-now.start .tl-flag { left: -5px; transform: none; }
+  .tl-now.end .tl-flag { left: auto; right: -5px; transform: none; }
 
   figure { margin: 0 0 1.5rem; }
   figure svg { width: 100%; height: auto; display: block; }

@@ -6,9 +6,11 @@ Statische Seite mit einer Antwort ("Leider ja.") und den AfD-Umfragewerten seit 
 
 - `build.py` holt `https://api.dawum.de/` (ODC-ODbL), filtert Bundestagsumfragen mit AfD-Wert,
   berechnet einen Trend und rendert die Vorlagen aus `PAGES` nach `site/` (Diagramme als
-  Inline-SVG, kein JavaScript-Bundle). Nebenbei entsteht `site/data.json`.
-- Seiten: `template.html` → `site/index.html` (Antwort, Trend und der Abschnitt
-  „Und wenn er bleibt?“ mit der Fortschreibung bis zur nächsten Wahl),
+  Inline-SVG, die Zeitleiste als HTML, damit ihre Beschriftung auf schmalen Displays nicht
+  mitskaliert; kein JavaScript-Bundle). Nebenbei entsteht `site/data.json`.
+- Seiten: `template.html` → `site/index.html` (Antwort, Zeitleiste vom Amtsantritt über heute
+  bis zum spätesten Wahltermin, Trend und der Abschnitt „Und wenn er bleibt?“ mit der
+  Fortschreibung bis zur nächsten Wahl),
   `impressum.html` → `site/impressum.html` (Impressum und AGB).
 - `style.css` wird über den Platzhalter `{{STYLE}}` in jede Seite eingebettet, damit die Seiten
   ohne zusätzlichen Request gleich aussehen.

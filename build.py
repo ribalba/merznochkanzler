@@ -123,6 +123,42 @@ def fmt(x, digits=1):
     return f"{x:.{digits}f}".replace(".", ",")
 
 
+def timeline_html(today, term_start=TERM_START, election=NEXT_ELECTION):
+    """Waagerechte Zeitleiste: Amtsantritt, heute, spätester Wahltermin.
+
+    Als HTML und nicht als SVG, weil die Beschriftung sonst auf schmalen
+    Displays mitskaliert und unleserlich wird."""
+    total = max((election - term_start).days, 1)
+    done = min(max((today - term_start).days, 0), total)
+    pct = 100 * done / total
+    # Nähe zum Rand: die Fahne rückt dann an den Punkt statt mittig darüber.
+    where = " start" if pct < 12 else (" end" if pct > 88 else "")
+    ticks = []
+    for year in range(term_start.year + 1, election.year + 1):
+        p = 100 * (dt.date(year, 1, 1) - term_start).days / total
+        if 4 <= p <= 94:              # dichter am Rand kollidiert es mit den Endbeschriftungen
+            ticks.append(f'<span class="tl-year" style="left:{p:.2f}%"><span>{year}</span></span>')
+    label = (f"Zeitleiste: Amtsantritt am {term_start.strftime('%d.%m.%Y')}, "
+             f"heute Tag {done} von {total}, nächste Wahl spätestens am "
+             f"{election.strftime('%d.%m.%Y')}.")
+    return (
+        f'<div class="tl" role="img" aria-label="{label}">\n'
+        f'  <div class="tl-ends">'
+        f'<span><b>Amtsantritt</b>{term_start.strftime("%d.%m.%Y")}</span>'
+        f'<span class="r"><b>Nächste Wahl</b>{election.strftime("%d.%m.%Y")}</span>'
+        f'</div>\n'
+        f'  <div class="tl-track">\n'
+        f'    <div class="tl-done" style="width:{pct:.2f}%"></div>\n'
+        f'    <span class="tl-cap" style="left:0"></span>'
+        f'<span class="tl-cap" style="right:0"></span>\n'
+        + "".join(f"    {t}\n" for t in ticks) +
+        f'    <div class="tl-now{where}" style="left:{pct:.2f}%">'
+        f'<span class="tl-flag">heute</span></div>\n'
+        f'  </div>\n'
+        f'</div>'
+    )
+
+
 def chart_svg(rows, fit, today):
     """Punkte = Einzelumfragen seit Amtsantritt, Gerade = lineare Regression
     über diese Punkte, gestrichelt = Wahlergebnis."""
@@ -329,6 +365,7 @@ def main():
         "DB_UPDATE": str(db.get("Database", {}).get("Last_Update", ""))[:10],
         "BUILD_DATE": today.strftime("%d.%m.%Y"),
         "CHART": chart_svg(rows, fit, today),
+        "TIMELINE": timeline_html(today),
         # Prognoseseite
         "NEXT_ELECTION_DE": NEXT_ELECTION.strftime("%d.%m.%Y"),
         "DAYS_TO_ELECTION": str((NEXT_ELECTION - today).days),
